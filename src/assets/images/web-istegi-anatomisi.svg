@@ -1,0 +1,105 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="100%" height="100%">
+  <defs>
+    <!-- Background Grid -->
+    <pattern id="cyber-grid" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#161b22" stroke-width="1.2" />
+    </pattern>
+    <!-- Glowing gradients -->
+    <linearGradient id="primary-glow" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#00ffcc" stop-opacity="0.8" />
+      <stop offset="100%" stop-color="#0077ff" stop-opacity="0.8" />
+    </linearGradient>
+    <linearGradient id="header-grad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#21262d" />
+      <stop offset="100%" stop-color="#161b22" />
+    </linearGradient>
+  </defs>
+
+  <!-- Dark Canvas Base -->
+  <rect width="1200" height="630" fill="#0d1117" />
+  <rect width="1200" height="630" fill="url(#cyber-grid)" />
+
+  <!-- Background Ambience Glow -->
+  <circle cx="200" cy="150" r="180" fill="#00ffcc" opacity="0.05" filter="blur(40px)" />
+  <circle cx="1000" cy="450" r="220" fill="#0077ff" opacity="0.06" filter="blur(50px)" />
+
+  <!-- Left: Encapsulation Stack Visualization -->
+  <!-- Layer 2: Frame -->
+  <g transform="translate(100, 140)">
+    <rect width="460" height="76" rx="8" fill="#161b22" stroke="#30363d" stroke-width="1.5" />
+    <rect width="6" height="76" rx="3" fill="#8957e5" />
+    <text x="24" y="32" fill="#8b949e" font-family="monospace" font-size="12" font-weight="bold">LAYER 2 // DATA LINK</text>
+    <text x="24" y="56" fill="#e6edf3" font-family="monospace" font-size="16" font-weight="bold">Ethernet II Frame</text>
+    <text x="250" y="56" fill="#8957e5" font-family="monospace" font-size="13">[EthType: 0x0800]</text>
+  </g>
+
+  <!-- Layer 3: Packet -->
+  <g transform="translate(120, 230)">
+    <rect width="440" height="76" rx="8" fill="#161b22" stroke="#30363d" stroke-width="1.5" />
+    <rect width="6" height="76" rx="3" fill="#2f81f7" />
+    <text x="24" y="32" fill="#8b949e" font-family="monospace" font-size="12" font-weight="bold">LAYER 3 // NETWORK</text>
+    <text x="24" y="56" fill="#e6edf3" font-family="monospace" font-size="16" font-weight="bold">IPv4 Datagram</text>
+    <text x="230" y="56" fill="#2f81f7" font-family="monospace" font-size="13">[Protocol: 6 TCP]</text>
+  </g>
+
+  <!-- Layer 4: Segment -->
+  <g transform="translate(140, 320)">
+    <rect width="420" height="76" rx="8" fill="#161b22" stroke="#30363d" stroke-width="1.5" />
+    <rect width="6" height="76" rx="3" fill="#d29922" />
+    <text x="24" y="32" fill="#8b949e" font-family="monospace" font-size="12" font-weight="bold">LAYER 4 // TRANSPORT</text>
+    <text x="24" y="56" fill="#e6edf3" font-family="monospace" font-size="16" font-weight="bold">TCP Segment</text>
+    <text x="210" y="56" fill="#d29922" font-family="monospace" font-size="13">[Flags: PSH, ACK]</text>
+  </g>
+
+  <!-- Layer 7: Payload -->
+  <g transform="translate(160, 410)">
+    <rect width="400" height="76" rx="8" fill="#161b22" stroke="#00ffcc" stroke-width="1.8" />
+    <rect width="6" height="76" rx="3" fill="#00ffcc" />
+    <text x="24" y="32" fill="#00ffcc" font-family="monospace" font-size="12" font-weight="bold">LAYER 7 // APPLICATION</text>
+    <text x="24" y="56" fill="#ffffff" font-family="monospace" font-size="16" font-weight="bold">HTTP/1.1 Payload</text>
+    <text x="230" y="56" fill="#3fb950" font-family="monospace" font-size="13">GET / HTTP/1.1</text>
+  </g>
+
+  <!-- Encapsulation Bracket on Left -->
+  <path d="M 85 150 L 70 150 L 70 325 L 55 325 L 70 325 L 70 500 L 85 500" fill="none" stroke="#30363d" stroke-width="2" />
+  <text x="35" y="330" fill="#8b949e" font-family="monospace" font-size="12" transform="rotate(-90, 35, 330)" text-anchor="middle">ENCAPSULATION</text>
+
+  <!-- Right: Hex Inspection & Title Box -->
+  <g transform="translate(620, 140)">
+    <!-- Terminal Box -->
+    <rect width="480" height="346" rx="10" fill="#0d1117" stroke="#30363d" stroke-width="1.5" />
+    <rect width="480" height="36" rx="10" fill="url(#header-grad)" />
+    <!-- Terminal Dots -->
+    <circle cx="20" cy="18" r="5" fill="#f85149" />
+    <circle cx="36" cy="18" r="5" fill="#d29922" />
+    <circle cx="52" cy="18" r="5" fill="#3fb950" />
+    <text x="75" y="22" fill="#8b949e" font-family="monospace" font-size="12">wireshark_inspect_http.pcap</text>
+
+    <!-- Hex Dump Visual Mock -->
+    <g font-family="monospace" font-size="12" fill="#484f58" transform="translate(20, 60)">
+      <text y="20"><tspan fill="#8b949e">0000</tspan>  00 00 0c 07 ac 01 00 01  96 d9 17 8e <tspan fill="#8957e5">08 00</tspan> 45 00</text>
+      <text y="45"><tspan fill="#8b949e">0010</tspan>  02 24 5c 3a 40 00 34 <tspan fill="#2f81f7">06</tspan>  38 f0 91 fe a0 ed 41 6b</text>
+      <text y="70"><tspan fill="#8b949e">0020</tspan>  e1 dd <tspan fill="#d29922">0d 2c 00 50</tspan> 67 c3  27 91 3b fb a8 81 80 18</text>
+      <text y="95"><tspan fill="#8b949e">0030</tspan>  19 20 a8 2c 00 00 01 01  08 0a <tspan fill="#00ffcc">47 45 54 20 2f 20</tspan></text>
+      <text y="120"><tspan fill="#8b949e">0040</tspan>  <tspan fill="#00ffcc">48 54 54 50 2f 31 2e 31</tspan>  0d 0a 48 6f 73 74 3a 20</text>
+    </g>
+
+    <line x1="20" y1="210" x2="460" y2="210" stroke="#21262d" stroke-width="1" />
+
+    <!-- Metadata Labels -->
+    <g font-family="monospace" font-size="13" transform="translate(25, 240)">
+      <text y="0" fill="#58a6ff">> Analyzing Packet Stream #4</text>
+      <text y="24" fill="#8b949e">> Follow: TCP Stream [0]</text>
+      <text y="48" fill="#3fb950">> Status: Reassembled PDU (L7 Valid)</text>
+      <text y="74" fill="#00ffcc">> [Deep Dive] Bit-by-Bit Architecture</text>
+    </g>
+  </g>
+
+  <!-- Footer Branding -->
+  <text x="100" y="560" fill="#ffffff" font-family="sans-serif" font-size="28" font-weight="800" letter-spacing="-0.5">Bir Web İsteğinin Anatomisi</text>
+  <text x="100" y="590" fill="#8b949e" font-family="monospace" font-size="14">Bitlerden Katmanlara Kapsülleme ve Paket Yolculuğu • l4wire</text>
+
+  <!-- Tag / Badge -->
+  <rect x="1005" y="545" width="95" height="28" rx="6" fill="#1f6feb" fill-opacity="0.2" stroke="#388bfd" stroke-width="1" />
+  <text x="1052" y="564" fill="#58a6ff" font-family="monospace" font-size="12" font-weight="bold" text-anchor="middle">NETWORK</text>
+</svg>
