@@ -21,9 +21,9 @@ export default {
 
   // icon: github | linkedin | x | mail | rss | globe
   links: [
-    { name: 'GitHub', icon: 'github', url: 'https://github.com/' },
-    { name: 'LinkedIn', icon: 'linkedin', url: 'https://linkedin.com/' },
-    { name: 'E-posta', icon: 'mail', url: 'mailto:ornek@example.com' },
+    { name: 'GitHub', icon: 'github', url: 'https://github.com/l4wire' },
+    { name: 'LinkedIn', icon: 'linkedin', url: '#' },
+    { name: 'E-posta', icon: 'mail', url: '#' },
     { name: 'RSS', icon: 'rss', url: '/feed.xml' },
   ],
 
