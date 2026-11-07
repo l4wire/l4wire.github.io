@@ -1,0 +1,32 @@
+---
+layout: base.njk
+title: Arşiv
+permalink: /arsiv/
+---
+{%- set posts = collections.posts | reverse -%}
+<section class="page wrap">
+  <h1 class="page-title">Arşiv</h1>
+  <p class="page-sub">{{ posts.length }} yazı, {{ collections.categoryList.length }} kategori. En yenisi en üstte.</p>
+
+  {%- for y in posts | groupByYear %}
+  <div class="arc-year">
+    <h2 class="arc-year-title">{{ y.year }}<span class="count">{{ y.posts.length }} yazı</span></h2>
+    {%- for m in y.posts | groupByMonth %}
+    <div class="arc-month">
+      <h3 class="arc-month-title">{{ m.date | month }}</h3>
+      <ol class="arc-list">
+        {%- for post in m.posts %}
+        <li>
+          <a href="{{ post.url }}" class="arc-row">
+            <span class="arc-day">{{ post.date | day }}</span>
+            <span class="arc-title">{{ post.data.title }}{% if post.data.draft %} <span class="draft">taslak</span>{% endif %}</span>
+            <span class="arc-cat">{{ post.data.category }}</span>
+          </a>
+        </li>
+        {%- endfor %}
+      </ol>
+    </div>
+    {%- endfor %}
+  </div>
+  {%- endfor %}
+</section>

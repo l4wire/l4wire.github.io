@@ -1,0 +1,21 @@
+---
+layout: base.njk
+pagination:
+  data: collections.categoryList
+  size: 1
+  alias: cat
+permalink: /kategori/{{ cat.slug }}/
+eleventyComputed:
+  title: "{{ cat.name }}"
+---
+{%- from "macros.njk" import card -%}
+<section class="page wrap">
+  <a href="/kategoriler/" class="back">Tüm kategoriler</a>
+  <h1 class="page-title">{{ cat.name }}</h1>
+  <p class="page-sub">{% if site.categories[cat.name] %}{{ site.categories[cat.name] }} {% endif %}Bu kategoride {{ cat.posts.length }} yazı var.</p>
+  <div class="grid">
+    {%- for post in cat.posts %}
+    {{ card(post) }}
+    {%- endfor %}
+  </div>
+</section>

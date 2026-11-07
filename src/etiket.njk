@@ -1,0 +1,21 @@
+---
+layout: base.njk
+pagination:
+  data: collections.tagList
+  size: 1
+  alias: tag
+permalink: /etiket/{{ tag.slug }}/
+eleventyComputed:
+  title: "#{{ tag.name }}"
+---
+{%- from "macros.njk" import card -%}
+<section class="page wrap">
+  <a href="/kategoriler/#etiketler" class="back">Tüm etiketler</a>
+  <h1 class="page-title">#{{ tag.name }}</h1>
+  <p class="page-sub">Bu etikette {{ tag.posts.length }} yazı var.</p>
+  <div class="grid">
+    {%- for post in tag.posts %}
+    {{ card(post) }}
+    {%- endfor %}
+  </div>
+</section>

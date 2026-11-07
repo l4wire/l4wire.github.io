@@ -1,0 +1,30 @@
+---
+layout: base.njk
+title: Kategoriler
+permalink: /kategoriler/
+---
+{%- from "macros.njk" import cover -%}
+<section class="page wrap">
+  <h1 class="page-title">Kategoriler</h1>
+  <p class="page-sub">Yazılar konularına göre gruplanmış hâlde. Daha dar bir konu arıyorsan aşağıdaki etiketlere bak.</p>
+
+  <div class="cat-grid">
+    {%- for c in collections.categoryList %}
+    <a href="/kategori/{{ c.slug }}/" class="cat-card">
+      {{ cover(c.posts[0]) }}
+      <div class="cat-body">
+        <h2>{{ c.name }}</h2>
+        {% if site.categories[c.name] %}<p>{{ site.categories[c.name] }}</p>{% endif %}
+        <span class="count">{{ c.posts.length }} yazı</span>
+      </div>
+    </a>
+    {%- endfor %}
+  </div>
+
+  <h2 class="section-title" id="etiketler">Etiketler</h2>
+  <ul class="tag-cloud">
+    {%- for t in collections.tagList %}
+    <li><a href="/etiket/{{ t.slug }}/">#{{ t.name }}<span class="count">{{ t.posts.length }}</span></a></li>
+    {%- endfor %}
+  </ul>
+</section>

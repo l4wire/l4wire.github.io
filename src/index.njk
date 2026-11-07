@@ -1,0 +1,52 @@
+---
+layout: base.njk
+bodyClass: is-home
+---
+{%- from "macros.njk" import icon, card -%}
+{%- set posts = collections.posts | reverse -%}
+
+<section class="intro wrap">
+  <div class="intro-main">
+    <div class="intro-id">
+      <img class="avatar" src="{{ site.author.avatar }}" alt="{{ site.author.name }}" width="112" height="112">
+      <div>
+        <h1 class="intro-name">{{ site.author.name }}</h1>
+        <p class="intro-role">{{ site.author.role }}</p>
+      </div>
+    </div>
+    <p class="intro-bio">{{ site.author.bio }}</p>
+    <ul class="links">
+      {%- for l in site.links %}
+      <li><a href="{{ l.url }}"{% if 'http' in l.url %} target="_blank" rel="noopener"{% endif %}>{{ icon(l.icon) }}{{ l.name }}</a></li>
+      {%- endfor %}
+    </ul>
+  </div>
+
+  <nav class="intro-side" aria-label="Kategoriler">
+    <h2>Kategoriler</h2>
+    <ul>
+      {%- for c in collections.categoryList %}
+      <li><a href="/kategori/{{ c.slug }}/"><span>{{ c.name }}</span><span class="count">{{ c.posts.length }}</span></a></li>
+      {%- endfor %}
+    </ul>
+    <a class="side-more" href="/arsiv/">{{ posts.length }} yazının tamamı arşivde</a>
+  </nav>
+</section>
+
+<section class="latest wrap" aria-labelledby="son-yazilar">
+  <div class="section-head">
+    <h2 id="son-yazilar">Son yazılar</h2>
+    <a href="/arsiv/">Arşiv</a>
+  </div>
+
+  {%- if not posts.length %}
+  <p class="empty">Henüz yazı yok. <code>npm run new-post -- "Başlık"</code> komutuyla ilk yazını oluştur.</p>
+  {%- else %}
+  {{ card(posts[0], true) }}
+  <div class="grid">
+    {%- for post in posts.slice(1, site.homePosts) %}
+    {{ card(post) }}
+    {%- endfor %}
+  </div>
+  {%- endif %}
+</section>

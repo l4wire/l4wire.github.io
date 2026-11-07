@@ -1,0 +1,60 @@
+---
+layout: base.njk
+bodyClass: is-post
+---
+{%- from "macros.njk" import card -%}
+{%- set headings = content | toc -%}
+{%- set nb = collections.posts | neighbors(page.url) -%}
+<article class="post wrap" data-pagefind-body>
+  <header class="post-head">
+    <a href="/kategori/{{ category | slug }}/" class="post-cat" data-pagefind-ignore>{{ category }}</a>
+    <h1 data-pagefind-meta="title">{{ title }}{% if draft %} <span class="draft">taslak</span>{% endif %}</h1>
+    {% if description %}<p class="lede">{{ description }}</p>{% endif %}
+    <div class="post-meta" data-pagefind-ignore>
+      <img class="avatar-sm" src="{{ site.author.avatar }}" alt="" width="32" height="32">
+      <span class="by">{{ site.author.name }}</span>
+      <time datetime="{{ page.date | iso }}">{{ page.date | date }}</time>
+      <span>{{ content | readingTime }} dk okuma</span>
+      {% if difficulty %}<span class="stamp stamp-{{ difficulty | slug }}" title="Zorluk">{{ difficulty }}</span>{% endif %}
+    </div>
+  </header>
+
+  <figure class="post-cover" data-pagefind-ignore>
+    {%- if image %}
+    <img src="{{ image }}" alt="" width="1200" height="630" fetchpriority="high">
+    {%- else %}
+    {{ title | cover | safe }}
+    {%- endif %}
+  </figure>
+
+  {% if headings.length > 1 %}
+  <details class="toc" data-pagefind-ignore open>
+    <summary>İçindekiler</summary>
+    <ol>
+      {%- for h in headings %}
+      <li class="toc-{{ h.depth }}"><a href="#{{ h.id }}">{{ h.text }}</a></li>
+      {%- endfor %}
+    </ol>
+  </details>
+  {% endif %}
+
+  <div class="prose">
+    {{ content | safe }}
+
+    {% if tags and tags.length %}
+    <ul class="post-tags" data-pagefind-ignore>
+      {%- for t in tags %}<li><a href="/etiket/{{ t | slug }}/">#{{ t }}</a></li>{% endfor -%}
+    </ul>
+    {% endif %}
+  </div>
+</article>
+
+{% if nb.older or nb.newer %}
+<nav class="post-nav wrap" aria-label="Diğer yazılar">
+  <h2 class="section-title">Diğer yazılar</h2>
+  <div class="grid">
+    {% if nb.newer %}{{ card(nb.newer) }}{% endif %}
+    {% if nb.older %}{{ card(nb.older) }}{% endif %}
+  </div>
+</nav>
+{% endif %}

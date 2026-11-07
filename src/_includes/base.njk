@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="{{ site.lang }}">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% if title %}{{ title }} | {{ site.title }}{% else %}{{ site.title }}: {{ site.description }}{% endif %}</title>
+  <meta name="description" content="{{ description or site.description }}">
+  <link rel="canonical" href="{{ site.url }}{{ page.url }}">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="alternate" type="application/atom+xml" title="{{ site.title }}" href="/feed.xml">
+  <meta property="og:type" content="{% if layout == 'post.njk' %}article{% else %}website{% endif %}">
+  <meta property="og:title" content="{{ title or site.title }}">
+  <meta property="og:description" content="{{ description or site.description }}">
+  <meta property="og:url" content="{{ site.url }}{{ page.url }}">
+  {%- if image and not image.endsWith('.svg') %}
+  <meta property="og:image" content="{{ site.url }}{{ image }}">
+  <meta name="twitter:card" content="summary_large_image">
+  {%- endif %}
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500&display=swap">
+  <link rel="stylesheet" href="/assets/style.css">
+
+  {# Tema ve sezon ilk boyamadan önce uygulanır; tema varsayılanı sistem ayarıdır #}
+  <script>
+    (function () {
+      var r = document.documentElement, m = '{{ site.mode }}';
+      if (m === 'otomatik') {
+        var d = new Date(), mo = d.getMonth() + 1, g = d.getDate();
+        m = (mo === 10 && g >= 20) || (mo === 11 && g <= 2) ? 'halloween'
+          : (mo === 12 && g >= 15) || (mo === 1 && g <= 7) ? 'yilbasi' : 'standart';
+      }
+      if (m === 'halloween' || m === 'yilbasi') r.dataset.season = m;
+      try {
+        var t = localStorage.getItem('theme');
+        if (t) r.dataset.theme = t;
+        if (localStorage.getItem('fx') === 'off') r.dataset.fx = 'off';
+      } catch (e) {}
+    })();
+  </script>
+  <script src="/assets/main.js" defer></script>
+</head>
+<body class="{{ bodyClass }}">
+  <a class="skip" href="#icerik">İçeriğe geç</a>
+
+  <header class="site-header wrap">
+    <a href="/" class="logo" aria-label="{{ site.title }}, ana sayfa">{{ site.title }}</a>
+    <nav class="nav" id="menu" aria-label="Ana menü">
+      {%- set nav = [["/", "Ana sayfa"], ["/arsiv/", "Arşiv"], ["/kategoriler/", "Kategoriler"], ["/hakkinda/", "Hakkında"]] -%}
+      {%- for item in nav %}
+      {%- set active = page.url == item[0]
+        or (item[0] == "/arsiv/" and "/yazilar/" in page.url)
+        or (item[0] == "/kategoriler/" and ("/kategori/" in page.url or "/etiket/" in page.url)) %}
+      <a href="{{ item[0] }}"{% if active %} aria-current="page"{% endif %}>{{ item[1] }}</a>
+      {%- endfor %}
+    </nav>
+    <div class="tools">
+      <button type="button" class="tool" data-search-open aria-label="Ara" title="Ara (Ctrl+K)">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+      </button>
+      <button type="button" class="tool" data-fx-toggle hidden aria-pressed="true" aria-label="Sezon efektleri" title="Sezon efektlerini aç / kapat">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l1.9 5.1L19 10l-5.1 1.9L12 17l-1.9-5.1L5 10l5.1-1.9z"/><path d="M19 15l.8 2.2L22 18l-2.2.8L19 21l-.8-2.2L16 18l2.2-.8z"/></svg>
+      </button>
+      <button type="button" class="tool" data-theme-toggle aria-label="Temayı değiştir" title="Açık / koyu tema">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><path d="M12 3.5v17a8.5 8.5 0 0 0 0-17Z" fill="currentColor"/></svg>
+      </button>
+      <button type="button" class="tool menu-toggle" aria-label="Menü" aria-expanded="false" aria-controls="menu">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+      </button>
+    </div>
+  </header>
+
+  <main id="icerik">
+    {{ content | safe }}
+  </main>
+
+  <footer class="site-footer wrap">
+    <p>Buradaki teknikler eğitim amaçlıdır. Yalnızca sahibi olduğun veya yazılı izin aldığın sistemlerde dene.</p>
+    <p class="footer-links">
+      {%- for l in site.links %}<a href="{{ l.url }}">{{ l.name }}</a>{% endfor -%}
+    </p>
+    <p class="footer-copy">© {{ "now" | year }} {{ site.author.name }}</p>
+  </footer>
+
+  <dialog class="search" aria-label="Yazılarda ara">
+    <form method="dialog" class="search-bar">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+      <input type="search" placeholder="Yazılarda ara" autocomplete="off" spellcheck="false" aria-label="Arama terimi">
+      <button class="search-close" aria-label="Kapat">Esc</button>
+    </form>
+    <ol class="search-results"></ol>
+    <p class="search-status">Başlık, etiket veya içerikte geçen bir kelime yaz.</p>
+  </dialog>
+</body>
+</html>
