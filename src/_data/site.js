@@ -8,7 +8,7 @@ export default {
 
   // Sezon efekti: 'standart' | 'halloween' | 'yilbasi' | 'otomatik'
   // otomatik: ziyaretçinin tarihine göre 20 Ekim–2 Kasım Halloween, 15 Aralık–7 Ocak yılbaşı, diğer günler standart.
-  mode: 'yilbasi',
+  mode: 'otomatik',
 
   // Ana sayfadaki profil alanı
   author: {
